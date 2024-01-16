@@ -6,7 +6,7 @@ services:
     image: quartz-sample-web
     build:
       context: .
-      dockerfile: QuartzSample.Web/Dockerfile
+      dockerfile: src/QuartzSample.Web/Dockerfile
     environment:
       - ASPNETCORE_HTTP_PORTS=5001
     ports:
