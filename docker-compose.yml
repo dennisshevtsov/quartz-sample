@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  quartz-sample-web:
+    container_name: quartz-sample-web
+    image: quartz-sample-web
+    build:
+      context: .
+      dockerfile: src/QuartzSample.Web/Dockerfile
+    environment:
+      - ASPNETCORE_HTTP_PORTS=5001
+    ports:
+      - "5001:5001"
