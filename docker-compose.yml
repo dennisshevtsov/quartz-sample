@@ -23,4 +23,4 @@ services:
     volumes:
       - type: bind
         source: ./init
-        target: /docker-entrypoint-initdb.d
+        target: /docker-entrypoint-initdb.d # postgres runs scripts in this directory after creating the db
