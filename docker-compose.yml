@@ -20,3 +20,7 @@ services:
       - POSTGRES_USER=dev
       - POSTGRES_PASSWORD=dev
       - POSTGRES_DB=quartz-sample-db
+    volumes:
+      - type: bind
+        source: ./init
+        target: /docker-entrypoint-initdb.d
