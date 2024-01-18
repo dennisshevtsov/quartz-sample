@@ -9,8 +9,11 @@ services:
       dockerfile: src/QuartzSample.Web/Dockerfile
     environment:
       - ASPNETCORE_HTTP_PORTS=5001
+      - CONNECTIONSTRINGS__QUARTZ=Host=quartz-sample-db;Port=5432;Database=quartz-sample-db;Username=dev;Password=dev;Include Error Detail=true
     ports:
       - "5001:5001"
+    depends_on:
+      - quartz-sample-db
   quartz-sample-db:
     container_name: quartz-sample-db
     image: postgres:16
