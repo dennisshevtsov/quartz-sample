@@ -4,14 +4,22 @@
 
 using Quartz;
 using Quartz.AspNetCore;
+using QuartzSample.Web;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddQuartz(configurator =>
 {
+  JobKey jobFromProgram = new("JobFromProgram");
+  configurator.AddJob<SimpleJob>(jobFromProgram);
+  configurator.AddTrigger(trigger => trigger.ForJob(jobFromProgram)
+                                            .WithIdentity("JobFromProgramTrigger")
+                                            .WithCronSchedule("*/10 * * ? * *")); // Run every 10 second
+
   configurator.UsePersistentStore(options =>
   {
-    string connectionString = builder.Configuration.GetConnectionString("QUARTZ") ??
-                              throw new ArgumentNullException("QUARTZ");
+    string? connectionString = builder.Configuration.GetConnectionString("QUARTZ");
+    ArgumentNullException.ThrowIfNull(connectionString);
+
     options.UsePostgres(connectionString);
     options.UseNewtonsoftJsonSerializer();
   });
