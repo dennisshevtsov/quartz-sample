@@ -13,7 +13,7 @@ builder.Services.AddQuartz(configurator =>
   configurator.AddJob<SimpleJob>(jobFromProgram);
   configurator.AddTrigger(trigger => trigger.ForJob(jobFromProgram)
                                             .WithIdentity("JobFromProgramTrigger")
-                                            .WithCronSchedule("*/10 * * ? * *")); // Run every 10 second
+                                            .WithCronSchedule("*/10 * * ? * *")); // Run every 10 seconds
 
   configurator.UsePersistentStore(options =>
   {
